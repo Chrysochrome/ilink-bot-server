@@ -4,11 +4,28 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ilink-bot-server"
-version = "0.1.0"
+version = "0.1.1"
 description = "Multi-user WeChat iLink Bot server SDK"
+readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "httpx>=0.27",
     "cryptography",
 ]
 license = { text = "MIT" }
+keywords = ["wechat", "ilink", "bot", "sdk", "asyncio"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Communications :: Chat",
+    "Framework :: AsyncIO",
+]
+authors = [
+  { name = "Chrysochrome" }
+]
+urls = { Homepage = "https://github.com/Chrysochrome/ilink-bot-server" }
