@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import contextlib
 import inspect
 import sys
 from collections.abc import Awaitable, Callable
@@ -10,6 +11,13 @@ from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
+
+try:
+    from opentelemetry.context import suppress_instrumentation
+except ImportError:
+    @contextlib.contextmanager
+    def suppress_instrumentation():  # type: ignore[misc]
+        yield
 
 from .api import (
     ApiError,
@@ -189,13 +197,14 @@ class BotWorker:
         try:
             while True:
                 try:
-                    updates = await get_updates(
-                        self._session,
-                        self._credentials.base_url,
-                        self._credentials.token,
-                        self._cursor,
-                        40.0,
-                    )
+                    with suppress_instrumentation():
+                        updates = await get_updates(
+                            self._session,
+                            self._credentials.base_url,
+                            self._credentials.token,
+                            self._cursor,
+                            40.0,
+                        )
                     new_cursor = updates.get("get_updates_buf") or self._cursor
                     cursor_changed = new_cursor != self._cursor
                     self._cursor = new_cursor

@@ -44,14 +44,14 @@ class BotServer:
         async def on_msg(msg: IncomingMessage): ...
     """
 
-    def __init__(self) -> None:
+    def __init__(self, *, client: httpx.AsyncClient | None = None) -> None:
         self._credential_loader: CredentialLoader | None = None
         self._credential_update_handler: CredentialUpdateHandler | None = None
         self._on_error: ErrorHandler | None = None
         self._login_status_handlers: list[LoginStatusHandler] = []
         self._handlers: list[MessageHandler] = []
         self._workers: dict[str, BotWorker] = {}
-        self._session: httpx.AsyncClient | None = None
+        self._session: httpx.AsyncClient | None = client
         self._initialized = False
         self._login_tasks: dict[str, asyncio.Task[None]] = {}
 
