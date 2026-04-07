@@ -13,7 +13,7 @@ from urllib.parse import quote
 import httpx
 
 try:
-    from opentelemetry.context import suppress_instrumentation
+    from opentelemetry.instrumentation.utils import suppress_instrumentation
 except ImportError:
     @contextlib.contextmanager
     def suppress_instrumentation():  # type: ignore[misc]

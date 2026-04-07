@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ilink-bot-server"
-version = "0.1.2"
+version = "0.1.3"
 description = "Multi-user WeChat iLink Bot server SDK"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -32,5 +32,5 @@ urls = { Homepage = "https://github.com/Chrysochrome/ilink-bot-server" }
 
 [dependency-groups]
 dev = [
-    "opentelemetry-api",
+    "opentelemetry-instrumentation",
 ]
